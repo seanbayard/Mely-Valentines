@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Important Question</title>
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+
+      /* 🔽 BACKGROUND IMAGE - ADD YOUR IMGUR LINK HERE 🔽 */
+      background-image: url("https://imgur.com/a/oks6NAr");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .overlay {
+      background: rgba(255, 230, 238, 0.88);
+      padding: 40px;
+      border-radius: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 160px;
+      width: 300px;
+      margin: auto;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #no {
+      background: #999;
+      color: white;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #yesPic {
+      display: none;
+      width: 300px;
+      margin-top: 20px;
+      border-radius: 15px;
+      animation: popIn 0.6s ease;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.6);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="overlay">
+    <h1>Mely, will you be my Valentine? 💘</h1>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesClicked()">Yes 💖</button>
+      <button id="no">No 😐</button>
+    </div>
+
+    <!-- 🔽 POPUP IMAGE WHEN YES IS CLICKED - ADD YOUR IMGUR LINK HERE 🔽 -->
+    <img
+      id="yesPic"
+      src="https://imgur.com/Fv0OfTX"
+      alt="Us 💕"
+    >
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    let attempts = 0;
+
+    const messages = [
+      "No 😐",
+      "Wait what",
+      "That’s not an option",
+      "Try again",
+      "Be serious",
+      "Nice try",
+      "You know you want to",
+      "Ok fine 😌"
+    ];
+
+    // Works on PC hover + iPhone tap
+    ["mouseover", "touchstart"].forEach(event => {
+      noBtn.addEventListener(event, () => {
+        const x = Math.random() * 220;
+        const y = Math.random() * 120;
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+
+        if (attempts < messages.length) {
+          noBtn.textContent = messages[attempts];
+          attempts++;
+        }
+
+        if (attempts === messages.length) {
+          noBtn.textContent = "Yes 💖";
+          noBtn.style.background = "#ff4d6d";
+          noBtn.onclick = yesClicked;
+        }
+      });
+    });
+
+    function yesClicked() {
+      document.querySelector("h1").innerText = "She's so sweet this girl 💕";
+      document.getElementById("yesPic").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
